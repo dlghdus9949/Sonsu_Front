@@ -7,7 +7,7 @@ const LogoBg = () => {
   return (
     <View style={[styles.container, { width, height }]}>
       <Image
-        source={require("../../assets/SonsuLogo.png")}
+        source={require("../../assets/images/SonsuLogo.png")}
         style={[styles.LogoBg, { width: width * 0.5, height: height * 0.5 }]}
       />
     </View>

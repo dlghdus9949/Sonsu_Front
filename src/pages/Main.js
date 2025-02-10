@@ -1,9 +1,10 @@
 import { View, Text } from "react-native";
+import Menu from "../components/Menu";
 
 const Main = () => {
   return (
     <View>
-      <Text>메인</Text>
+      <Text>메인as;dlfka'sdflsfk</Text>
     </View>
   );
 };

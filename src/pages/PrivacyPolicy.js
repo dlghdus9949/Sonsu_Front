@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   checkAll: {
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: "#ccc",
     borderRadius: 10,
     padding: 20,
