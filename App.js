@@ -1,20 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Login from "./src/pages/Login";
+import SignUp from "./src/pages/SignUp";
+import Main from "./src/pages/Main";
+import AppPermissions from "./src/pages/AppPermissions";
+import PrivacyPolicy from "./src/pages/PrivacyPolicy";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>해내보자 ..... 세1기 화이팅 ....</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Main" component={Main} />
+        <Stack.Screen name="AppPermissions" component={AppPermissions} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
