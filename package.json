@@ -16,6 +16,7 @@
     "expo": "~52.0.31",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
+<<<<<<< HEAD
     "react-hook-form": "^7.54.2",
     "react-native": "0.76.7",
     "react-native-gesture-handler": "^2.23.0",
@@ -24,6 +25,10 @@
     "react-native-screens": "^4.6.0",
     "react-native-vector-icons": "^10.2.0",
     "expo-checkbox": "~4.0.1"
+=======
+    "react-native": "0.76.7",
+    "expo-font": "~13.0.3"
+>>>>>>> origin/main
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
