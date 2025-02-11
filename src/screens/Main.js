@@ -11,45 +11,43 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import Menu from "../components/Menu";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Main = () => {
   const bottomSheetRef = useRef(null);
 
-  // ✅ BottomSheet가 어느 위치에서 멈출지 지정
-  const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
-
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const snapPoints = useMemo(() => ["38%", "38%", "93%"], []);
 
   return (
-    <View style={styles.container}>
-      {/* 노랑배경 */}
-      <View style={styles.Model}>
-        <Text style={styles.textYellow}>안녕하세요, OO님!</Text>
-        <Image
-          source={require("../../assets/images/sonsuModel.png")}
-          style={styles.sonsuModel}
-        />
-        <TouchableOpacity style={styles.LearnBtn}>
-          <Text style={styles.LearnBtnText}>배움터</Text>
-        </TouchableOpacity>
-        {/* 하얀배경 */}
-        <GestureHandlerRootView style={styles.whiteContainer}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        {/* 노랑배경 */}
+        <View style={styles.Model}>
+          <Text style={styles.textYellow}>안녕하세요, OO님!</Text>
+          <Image
+            source={require("../../assets/images/sonsuModel.png")}
+            style={styles.sonsuModel}
+          />
+          <TouchableOpacity style={styles.LearnBtn}>
+            <Text style={styles.LearnBtnText}>배움터</Text>
+          </TouchableOpacity>
+
+          {/* 하얀배경 */}
           <BottomSheet
             ref={bottomSheetRef}
-            index={0}
+            index={1}
             snapPoints={snapPoints}
-            onChange={handleSheetChanges}
+            style={styles.sheet}
+            backgroundStyle={{ backgroundColor: "#f5f5f5" }}
           >
-            <BottomSheetView style={styles.contentContainer}>
-              <Text>Awesome 🎉</Text>
+            <BottomSheetView style={styles.whiteContainer}>
+              <Text>안녕</Text>
             </BottomSheetView>
           </BottomSheet>
-        </GestureHandlerRootView>
+        </View>
+        <Menu />
       </View>
-      <Menu />
-    </View>
+    </GestureHandlerRootView>
   );
 };
 
@@ -94,6 +92,8 @@ const styles = StyleSheet.create({
   whiteContainer: {
     flex: 1,
     backgroundColor: "grey",
+    // justifyContent: "center",
+    // alignContent: "center",
     width: "100%",
     backgroundColor: "#F5F5F5",
     borderRadius: 30,

@@ -8,10 +8,8 @@ import Main from "./src/screens/Main";
 import Menu from "./src/components/Menu";
 import AppPermissions from "./src/screens/AppPermissions";
 import PrivacyPolicy from "./src/screens/PrivacyPolicy";
-import Main from "./src/pages/Main";
 import Classroom from "./src/screens/Classroom/Classroom";
-import CategoryTab from './src/components/CategoryTab';
-import { StatusBar } from "expo-status-bar";
+import CategoryTab from "./src/components/CategoryTab";
 
 const Stack = createStackNavigator();
 
@@ -21,11 +19,12 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="Main" component={Main} />
-
           <Stack.Screen name="AppPermissions" component={AppPermissions} />
+          <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+          <Stack.Screen name="Main" component={Main} />
+          <Stack.Screen name="Classroom" component={Classroom} />
+          <Stack.Screen name="CategoryTab" component={CategoryTab} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

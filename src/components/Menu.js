@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Feather from "@expo/vector-icons/Feather";
 import Main from "../screens/Main";
 import Learning from "../screens/Learning";
+import Classroom from "../screens/Classroom/Classroom";
 import MyPage from "../screens/MyPage";
 import { View, Image, StyleSheet } from "react-native";
 
@@ -22,7 +23,7 @@ const Menu = () => {
           }}
         >
           <Tab.Screen
-            name="Home"
+            name="Learning"
             component={Learning}
             options={{
               tabBarIcon: ({ color, size }) => (
@@ -33,7 +34,7 @@ const Menu = () => {
             }}
           />
           <Tab.Screen
-            name="Learning"
+            name="Main"
             component={Main}
             options={{
               tabBarIcon: ({ color, size }) => (
