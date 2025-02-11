@@ -11,7 +11,6 @@ import Main from "./src/pages/Main";
 import Classroom from "./src/screens/Classroom/Classroom";
 import CategoryTab from './src/components/CategoryTab';
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 
 const Stack = createStackNavigator();
 
