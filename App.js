@@ -1,15 +1,14 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from "./src/pages/Login";
-import SignUp from "./src/pages/SignUp";
-import Main from "./src/pages/Main";
-import AppPermissions from "./src/pages/AppPermissions";
-import PrivacyPolicy from "./src/pages/PrivacyPolicy";
+import Login from "./src/screens/Member/Login";
+import SignUp from "./src/screens/Member/SignUp";
+import Main from "./src/screens/Main";
+import AppPermissions from "./src/screens/Member/AppPermissions";
+import PrivacyPolicy from "./src/screens/Member/PrivacyPolicy";
 import Classroom from "./src/screens/Classroom/Classroom";
 import CategoryTab from './src/components/CategoryTab';
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -29,12 +28,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F5F5F5",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

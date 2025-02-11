@@ -106,7 +106,7 @@ const SignUp = () => {
     <View style={styles.container}>
       <View style={styles.topSection}>
         <Image
-          source={require("../../assets/SonsuLogo.png")}
+          source={require("../../../assets/images/SonsuLogo.png")}
           style={styles.logo}
         />
         <Text style={styles.title}>손手잇다</Text>

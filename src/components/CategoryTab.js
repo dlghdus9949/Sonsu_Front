@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, Text, TouchableOpacity } from 'react-native';
+import Class from '../screens/Classroom/Class';
 
 const categories = ['초급', '중급', '고급'];
 
-export default function CategoryList() {
-  // 초기값을 '초급'으로 설정
+export default function CategoryTab() {
   const [selectedCategory, setSelectedCategory] = useState('초급');
 
-  // 카테고리별 밑줄 색을 설정하는 함수
   const getBorderBottomColor = (category) => {
     switch (category) {
       case '초급':
-        return '#39B360'; // 초급 선택 시 초록색
+        return '#39B360';
       case '중급':
-        return '#487BCD'; // 중급 선택 시 파란색
+        return '#487BCD';
       case '고급':
-        return '#FF9381'; // 고급 선택 시 빨간색
+        return '#FF9381';
       default:
-        return '#39B360'; // 기본값은 초록색
+        return '#39B360';
     }
   };
 
@@ -29,25 +28,12 @@ export default function CategoryList() {
         selectedCategory === item && {
           borderBottomWidth: 3,
           borderBottomColor: getBorderBottomColor(item),
-
         },
       ]}
     >
       <Text>{item}</Text>
     </TouchableOpacity>
   );
-
-  const renderContent = () => {
-    if (selectedCategory === '초급') {
-      return <Text>초급</Text>;
-    }
-    if (selectedCategory === '중급') {
-      return <Text>중급</Text>;
-    }
-    if (selectedCategory === '고급') {
-      return <Text>고급</Text>;
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -60,7 +46,7 @@ export default function CategoryList() {
         style={styles.categoryList}
       />
       <View style={styles.content}>
-        {renderContent()}
+        <Class level={selectedCategory} /> {/* 선택된 카테고리 props로 전달 */}
       </View>
     </View>
   );
