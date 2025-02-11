@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import Menu from "../components/Menu";
 
 const Main = () => {
   const bottomSheetRef = useRef(null);
@@ -47,6 +48,7 @@ const Main = () => {
           </BottomSheet>
         </GestureHandlerRootView>
       </View>
+      <Menu />
     </View>
   );
 };

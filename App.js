@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"; // âœ… ì¶
 
 import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
+import Main from "./src/screens/Main";
 import Menu from "./src/components/Menu";
 import AppPermissions from "./src/screens/AppPermissions";
 import PrivacyPolicy from "./src/screens/PrivacyPolicy";
@@ -18,7 +19,8 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="Main" component={Menu} />
+          <Stack.Screen name="Main" component={Main} />
+
           <Stack.Screen name="AppPermissions" component={AppPermissions} />
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
         </Stack.Navigator>

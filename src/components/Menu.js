@@ -1,6 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
 import Main from "../screens/Main";
 import Learning from "../screens/Learning";
@@ -19,22 +18,23 @@ const Menu = () => {
             tabBarItemStyle: styles.tabItem, // 개별 아이템 스타일 적용
             tabBarLabelStyle: styles.tabLabel, // 라벨 스타일 적용
             showLabel: true, // 라벨 표시
+            headerShown: false,
           }}
         >
           <Tab.Screen
             name="Home"
-            component={Main}
+            component={Learning}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <Feather name="book-open" size={28} color="black" />
               ),
               tabBarLabel: "배움터",
-              headerShown: false, // 헤더 없애기
+              // 헤더 없애기
             }}
           />
           <Tab.Screen
             name="Learning"
-            component={Learning}
+            component={Main}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <Image
