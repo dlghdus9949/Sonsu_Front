@@ -1,25 +1,31 @@
+import React from 'react';
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { useFonts } from "expo-font";
-import { customFonts } from "./src/constants/fonts";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Bottom Tab 사용
+import Main from "./src/screens/Main";
+import Classroom from "./src/screens/Classroom/Classroom";
+import CategoryTab from './src/components/CategoryTab';
+
+const Tab = createBottomTabNavigator(); // Tab Navigator 생성
 
 export default function App() {
-  const [fontsLoaded] = useFonts(customFonts);
-
-  if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
-    <View style={styles.container}>
-      <Text style={{ fontFamily: "PretendardVariable", fontSize: 20 }}>
-        안녕하세요, PretendardVariable 입니다!
-      </Text>
-      <Text style={{ fontFamily: "RixInooAriDuriRegular", fontSize: 20 }}>
-        안녕하세요, RixInooAriDuriRegular 입니다!
-      </Text>
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Main"
+        screenOptions={{
+          tabBarActiveTintColor: '#007BFF', // 탭 활성화 색
+          tabBarInactiveTintColor: '#808080', // 탭 비활성화 색
+          tabBarStyle: { backgroundColor: '#fff' }, // 탭 바 스타일
+        }}
+      >
+        <Tab.Screen name="Main" component={Main} />
+        <Tab.Screen name="Classroom" component={Classroom} />
+        <Tab.Screen name="CategoryTab" component={CategoryTab} />
+      </Tab.Navigator>
       <StatusBar style="auto" />
-    </View>
+    </NavigationContainer>
   );
 }
 
