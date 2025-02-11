@@ -1,30 +1,31 @@
-import React from 'react';
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Bottom Tab 사용
-import Main from "./src/screens/Main";
+import { createStackNavigator } from "@react-navigation/stack";
+import Login from "./src/pages/Login";
+import SignUp from "./src/pages/SignUp";
+import Main from "./src/pages/Main";
+import AppPermissions from "./src/pages/AppPermissions";
+import PrivacyPolicy from "./src/pages/PrivacyPolicy";
 import Classroom from "./src/screens/Classroom/Classroom";
 import CategoryTab from './src/components/CategoryTab';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 
-const Tab = createBottomTabNavigator(); // Tab Navigator 생성
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Main"
-        screenOptions={{
-          tabBarActiveTintColor: '#007BFF', // 탭 활성화 색
-          tabBarInactiveTintColor: '#808080', // 탭 비활성화 색
-          tabBarStyle: { backgroundColor: '#fff' }, // 탭 바 스타일
-        }}
-      >
-        <Tab.Screen name="Main" component={Main} />
-        <Tab.Screen name="Classroom" component={Classroom} />
-        <Tab.Screen name="CategoryTab" component={CategoryTab} />
-      </Tab.Navigator>
-      <StatusBar style="auto" />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Main" component={Main} />
+        <Stack.Screen name="AppPermissions" component={AppPermissions} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+        <Stack.Screen name="Classroom" component={Classroom} />
+        <Stack.Screen name="CategoryTab" component={CategoryTab} />
+      </Stack.Navigator>
+      <StatusBar style="auto" />  
     </NavigationContainer>
   );
 }
