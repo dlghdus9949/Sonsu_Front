@@ -4,6 +4,7 @@ import Feather from "@expo/vector-icons/Feather";
 import Main from "../screens/Main";
 import Learning from "../screens/Learning";
 import Classroom from "../screens/Classroom/Classroom";
+import Classroom from "../screens/Classroom/Classroom";
 import MyPage from "../screens/MyPage";
 import { View, Image, StyleSheet } from "react-native";
 
@@ -19,28 +20,29 @@ const Menu = () => {
             tabBarItemStyle: styles.tabItem, // 개별 아이템 스타일 적용
             tabBarLabelStyle: styles.tabLabel, // 라벨 스타일 적용
             showLabel: true, // 라벨 표시
-            headerShown: false,
+            tabBarActiveTintColor: "#FFE694", // 활성화된 탭의 텍스트와 아이콘 색상 변경
+            tabBarInactiveTintColor: "black", // 비활성화된 탭의 텍스트와 아이콘 색상 변경
           }}
         >
           <Tab.Screen
-            name="Learning"
-            component={Learning}
+            name="Classroom"
+            component={Classroom}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <Feather name="book-open" size={28} color="black" />
+                <Feather name="book-open" size={28} color={color} />
               ),
               tabBarLabel: "배움터",
               // 헤더 없애기
             }}
           />
           <Tab.Screen
-            name="Main"
+            name="Home"
             component={Main}
             options={{
-              tabBarIcon: ({ color, size }) => (
+              tabBarIcon: () => (
                 <Image
                   source={require("../../assets/images/SonsuLogo.png")}
-                  style={styles.centerIcon}
+                  style={styles.centerIcon} // 사진은 그대로 유지
                 />
               ),
               tabBarLabel: "",
@@ -51,7 +53,7 @@ const Menu = () => {
             component={MyPage}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <Feather name="user" size={28} color="black" />
+                <Feather name="user" size={28} color={color} />
               ),
               tabBarLabel: "마이페이지",
             }}

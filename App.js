@@ -5,12 +5,17 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"; // âœ… ì¶
 import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import Main from "./src/screens/Main";
+import Login from "./src/screens/Member/Login";
+import SignUp from "./src/screens/Member/SignUp";
 import Menu from "./src/components/Menu";
 import AppPermissions from "./src/screens/AppPermissions";
 import PrivacyPolicy from "./src/screens/PrivacyPolicy";
+import AppPermissions from "./src/screens/Member/AppPermissions";
+import PrivacyPolicy from "./src/screens/Member/PrivacyPolicy";
 import Classroom from "./src/screens/Classroom/Classroom";
 import CategoryTab from "./src/components/CategoryTab";
 
+import CategoryTab from "./src/screens/Classroom/CategoryTab";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -22,6 +27,8 @@ export default function App() {
           <Stack.Screen name="AppPermissions" component={AppPermissions} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+          <Stack.Screen name="Classroom" component={Classroom} />
+          <Stack.Screen name="CategoryTab" component={CategoryTab} />
           <Stack.Screen name="Main" component={Main} />
           <Stack.Screen name="Classroom" component={Classroom} />
           <Stack.Screen name="CategoryTab" component={CategoryTab} />
