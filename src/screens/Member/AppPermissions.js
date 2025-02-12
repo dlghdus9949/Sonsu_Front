@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import LogoBg from "../components/LogoBg";
+import LogoBg from "../../components/LogoBg";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import React, { useState, useEffect } from "react";
 import Entypo from "@expo/vector-icons/Entypo";

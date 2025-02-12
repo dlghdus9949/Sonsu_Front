@@ -10,20 +10,15 @@ import {
 } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import Menu from "../components/Menu";
 
 const Main = () => {
   const bottomSheetRef = useRef(null);
 
-  // ✅ BottomSheet가 어느 위치에서 멈출지 지정
-  const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
-
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const snapPoints = useMemo(() => ["38%", "93%"], []);
 
   return (
     <View style={styles.container}>
-      {/* 노랑배경 */}
       <View style={styles.Model}>
         <Text style={styles.textYellow}>안녕하세요, OO님!</Text>
         <Image
@@ -33,20 +28,27 @@ const Main = () => {
         <TouchableOpacity style={styles.LearnBtn}>
           <Text style={styles.LearnBtnText}>배움터</Text>
         </TouchableOpacity>
-        {/* 하얀배경 */}
-        <GestureHandlerRootView style={styles.whiteContainer}>
-          <BottomSheet
-            ref={bottomSheetRef}
-            index={0}
-            snapPoints={snapPoints}
-            onChange={handleSheetChanges}
-          >
-            <BottomSheetView style={styles.contentContainer}>
-              <Text>Awesome 🎉</Text>
-            </BottomSheetView>
-          </BottomSheet>
-        </GestureHandlerRootView>
       </View>
+
+      {/* BottomSheet을 Model 밖으로 이동 */}
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        style={styles.sheet}
+        backgroundStyle={{ backgroundColor: "#f5f5f5" }}
+        enablePanDownToClose={false}
+      >
+        <BottomSheetView style={styles.whiteContainer}>
+          <ScrollView contentContainerStyle={styles.scrollContent}>
+            <Text style={styles.sheetText}>안녕</Text>
+            <Text style={styles.sheetText}>스크롤이 가능합니다!</Text>
+            <Text style={styles.sheetText}>추가 내용을 넣어보세요.</Text>
+          </ScrollView>
+        </BottomSheetView>
+      </BottomSheet>
+
+      <Menu />
     </View>
   );
 };
@@ -54,10 +56,11 @@ const Main = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#FFE694",
   },
   Model: {
-    height: "100%",
+    flex: 1,
     top: "10%",
     alignItems: "center",
   },
@@ -65,8 +68,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   sonsuModel: {
-    width: "50%",
-    height: "50%",
+    width: "40%",
+    height: "40%",
     resizeMode: "contain",
   },
   LearnBtn: {
@@ -89,17 +92,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
-  whiteContainer: {
-    flex: 1,
-    backgroundColor: "grey",
-    width: "100%",
-    backgroundColor: "#F5F5F5",
+  sheet: {
+    flexGrow: 1,
     borderRadius: 30,
   },
-  contentContainer: {
-    flex: 1,
-    padding: 36,
+  whiteContainer: {
+    borderRadius: 100,
+  },
+  scrollContent: {
+    padding: 20,
     alignItems: "center",
+  },
+  sheetText: {
+    fontSize: 18,
+    marginBottom: 10,
   },
 });
 

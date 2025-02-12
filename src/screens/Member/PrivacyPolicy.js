@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import LogoBg from "../components/LogoBg";
+import LogoBg from "../../components/LogoBg";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import React, { useState, useEffect } from "react";
 import Checkbox from "expo-checkbox";
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   checkAll: {
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 10,
     padding: 20,

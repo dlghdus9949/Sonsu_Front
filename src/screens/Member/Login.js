@@ -9,7 +9,6 @@ import {
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Menu from "../components/Menu";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -31,7 +30,7 @@ const Login = () => {
       {/* 로고, 손手잇다 */}
       <View style={styles.topSection}>
         <Image
-          source={require("../../assets/images/SonsuLogo.png")}
+          source={require("../../../assets/images/SonsuLogo.png")}
           style={styles.logo}
         />
         <Text style={styles.title}>손手잇다</Text>
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#FFE694",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   topSection: {
     alignItems: "center",
