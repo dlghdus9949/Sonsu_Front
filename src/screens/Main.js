@@ -1,22 +1,8 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import Menu from "../components/Menu";
+import React from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import BottomSheet from "../components/BottomSheet/BottomSheet";
 
 const Main = () => {
-  const bottomSheetRef = useRef(null);
-
-  const snapPoints = useMemo(() => ["38%", "93%"], []);
-
   return (
     <View style={styles.container}>
       <View style={styles.Model}>
@@ -30,25 +16,8 @@ const Main = () => {
         </TouchableOpacity>
       </View>
 
-      {/* BottomSheet을 Model 밖으로 이동 */}
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        style={styles.sheet}
-        backgroundStyle={{ backgroundColor: "#f5f5f5" }}
-        enablePanDownToClose={false}
-      >
-        <BottomSheetView style={styles.whiteContainer}>
-          <ScrollView contentContainerStyle={styles.scrollContent}>
-            <Text style={styles.sheetText}>안녕</Text>
-            <Text style={styles.sheetText}>스크롤이 가능합니다!</Text>
-            <Text style={styles.sheetText}>추가 내용을 넣어보세요.</Text>
-          </ScrollView>
-        </BottomSheetView>
-      </BottomSheet>
-
-      <Menu />
+      {/* BottomSheet 컴포넌트 호출 */}
+      <BottomSheet />
     </View>
   );
 };
@@ -56,7 +25,6 @@ const Main = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
     backgroundColor: "#FFE694",
   },
   Model: {
@@ -79,33 +47,16 @@ const styles = StyleSheet.create({
     marginTop: -15,
     marginBottom: 15,
     width: "50%",
-    // iOS 그림자 효과
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    // 안드로이드 그림자 효과
     elevation: 5,
   },
   LearnBtnText: {
     color: "#000",
     fontSize: 20,
     textAlign: "center",
-  },
-  sheet: {
-    flexGrow: 1,
-    borderRadius: 30,
-  },
-  whiteContainer: {
-    borderRadius: 100,
-  },
-  scrollContent: {
-    padding: 20,
-    alignItems: "center",
-  },
-  sheetText: {
-    fontSize: 18,
-    marginBottom: 10,
   },
 });
 
