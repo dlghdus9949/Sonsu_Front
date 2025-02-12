@@ -65,7 +65,11 @@ const Menu = () => {
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    bottom: 10,
+    position: "absolute",
+    bottom: 10, // 하단 고정
+    left: 0,
+    right: 0,
+    zIndex: 100, // 다른 요소보다 위에 위치
   },
   tabBar: {
     backgroundColor: "#fff",
