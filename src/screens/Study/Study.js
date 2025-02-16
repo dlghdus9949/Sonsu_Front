@@ -39,7 +39,7 @@ export default function Study() {
       </View>
 
       {/* 카메라 비디오 스트리밍 WebView */}
-      <View style={styles.cameraFeedWrapper}>
+      <View style={styles.cameraFeedWrapperr}>
         <WebView
           source={{ uri: `${serverIP}/video_feed` }}
           style={styles.cameraFeed}

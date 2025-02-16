@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import Header from '../../components/Header';
 
 export default function LessonDetail() {
   const navigation = useNavigation();
@@ -71,14 +72,11 @@ export default function LessonDetail() {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity 
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}>
-        <View>
-          <Text style={styles.Title}>{"Part"} {lesson.id}. {lesson.title}</Text>
-        </View>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <Header />
+      <View style={styles.backButton}>
+        <Text style={styles.Title}>{"Part"} {lesson.id}. {lesson.title}</Text>
+      </View>
 
       {renderCategoryButtons()}
 
@@ -122,7 +120,7 @@ export default function LessonDetail() {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -131,10 +129,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFE694',
   },
+  backButton: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   Title: {
     fontSize: 20,
-    textAlign: 'center',
-    marginTop: 20,
     fontWeight: 'bold'
   },
   categoryContainer: {
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    padding: 15,
+    padding: 13,
     marginTop: 15,
   },
   rowContainer: {
@@ -222,14 +222,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 10,
   },
   titleText: {
     fontSize: 16,
-  },
-  backButton: {
-    padding: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
