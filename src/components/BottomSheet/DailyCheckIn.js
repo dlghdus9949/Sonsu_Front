@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
+import ShortcutButton from "../ShortcutButton";
 
 const DailyCheckIn = () => {
   const [selectedDates, setSelectedDates] = useState({}); // 출석 체크된 날짜
@@ -37,7 +38,10 @@ const DailyCheckIn = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>오늘의 출석</Text>
+      <View style={styles.titleWrap}>
+        <Text style={styles.title}>오늘의 출석</Text>
+        <ShortcutButton style={styles.ShortcutButton} />
+      </View>
       <View style={styles.CalendarContainer}>
         {week.map(({ date, day, fullDate }, index) => (
           <View key={index} style={styles.dayContainer}>
@@ -66,10 +70,14 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
   },
+  titleWrap: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   title: {
     fontSize: 18,
     fontWeight: "700",
-    marginBottom: 20,
   },
   CalendarContainer: {
     flexDirection: "row",
@@ -80,6 +88,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 10,
     borderRadius: 20,
+    marginTop: 5,
 
     // ✅ iOS 그림자 효과
     shadowColor: "#000",
