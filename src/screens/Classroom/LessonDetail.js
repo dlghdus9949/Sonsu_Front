@@ -9,8 +9,6 @@ export default function LessonDetail() {
   const route = useRoute();
   const { lesson, title, progress, selectedLevel: initialSelectedLevel } = route.params;
 
-  console.log(lesson);
-
   const levelColors = {
     '초급': '#39B360',
     '중급': '#487BCD',
@@ -76,10 +74,9 @@ export default function LessonDetail() {
     <SafeAreaView style={styles.container}>
       <TouchableOpacity 
         style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
+        onPress={() => navigation.goBack()}>
         <View>
-          <Text style={styles.Title}>{"<- Part"} {lesson.id}. {lesson.title}</Text>
+          <Text style={styles.Title}>{"Part"} {lesson.id}. {lesson.title}</Text>
         </View>
       </TouchableOpacity>
 
@@ -103,6 +100,7 @@ export default function LessonDetail() {
               key={index} 
               style={styles.contentContainer}
               disabled={isTopicLocked(topic, index)}
+              onPress={() => navigation.navigate('Study', { topic, lesson })}
             >
               <View style={styles.card}>
                 {isTopicLocked(topic, index) && (
@@ -117,7 +115,7 @@ export default function LessonDetail() {
 
               <View style={styles.textContainer}>
                 <Text style={styles.title}>
-                  Part {index + 1}. {topic}
+                  Step {index + 1}. {topic}
                 </Text>
               </View>
             </TouchableOpacity>
