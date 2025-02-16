@@ -73,7 +73,7 @@ export default function LessonDetail() {
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header color="#fff"/>
       <View style={styles.backButton}>
         <Text style={styles.Title}>{"Part"} {lesson.id}. {lesson.title}</Text>
       </View>

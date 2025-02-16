@@ -5,7 +5,7 @@ import BackGround from "../../components/BackGround";
 const MyPage = () => {
   return (
     <View style={styles.container}>
-      <Header />
+      <Header color="#fff"/>
       <BackGround />
       {/* 사용자 프로필 */}
       <View style={styles.Profile}>

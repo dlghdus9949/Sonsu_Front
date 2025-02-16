@@ -11,6 +11,7 @@ import PrivacyPolicy from "./src/screens/Member/PrivacyPolicy";
 import Classroom from "./src/screens/Classroom/Classroom";
 import LessonDetail from "./src/screens/Classroom/LessonDetail";
 import Study from "./src/screens/Study/Study";
+import Review from "./src/screens/Review/Review";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="Classroom" component={Classroom} />
           <Stack.Screen name="LessonDetail" component={LessonDetail} />
           <Stack.Screen name="Study" component={Study} />
+          <Stack.Screen name="Review" component={Review} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

@@ -2,12 +2,15 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { useFonts } from "expo-font";
 import { customFonts } from "../../../src/constants/fonts";
 import ShortcutButton from "../ShortcutButton";
+import { useNavigation } from '@react-navigation/native';
+
 
 const Reviewing = () => {
   const [fontsLoaded] = useFonts(customFonts);
+  const navigation = useNavigation();
 
   return (
-    <View>
+    <TouchableOpacity onPress={() => navigation.navigate("Review")}>
       <Text style={styles.title}>복습하기</Text>
       <View style={styles.btnContainer}>
         <View style={styles.learnBtn}>
@@ -28,7 +31,7 @@ const Reviewing = () => {
           <ShortcutButton style={styles.shortcutButton} />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
