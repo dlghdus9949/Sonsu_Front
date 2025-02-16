@@ -3,15 +3,17 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import DailyCheckIn from "./DailyCheckIn";
 import ContinueLearning from "./ContinueLearning";
+import Reviewing from "./Reviewing";
+import AIStroy from "./AIStroy";
 
 const BottomSheetComponent = () => {
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["38%", "83%"], []);
+  const snapPoints = useMemo(() => ["45%", "90%"], []);
 
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      index={1}
+      index={0}
       snapPoints={snapPoints}
       style={styles.sheet}
       backgroundStyle={{ backgroundColor: "#f5f5f5" }}
@@ -24,9 +26,9 @@ const BottomSheetComponent = () => {
           {/* 이어서 학습하기 */}
           <ContinueLearning />
           {/* 복습하기 */}
-          <View></View>
+          <Reviewing />
           {/* AI가 알려주는 재미있는 수어 이야기 */}
-          <View></View>
+          <AIStroy />
         </ScrollView>
       </BottomSheetView>
     </BottomSheet>
@@ -35,6 +37,7 @@ const BottomSheetComponent = () => {
 
 const styles = StyleSheet.create({
   sheet: {
+    marginTop: 50,
     flexGrow: 1,
     borderRadius: 50,
     overflow: "hidden",
@@ -42,6 +45,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingVertical: 20,
     paddingHorizontal: 40,
+    paddingBottom: 380,
   },
 });
 
