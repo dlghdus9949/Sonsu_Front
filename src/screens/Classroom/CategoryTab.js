@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import classData from '../../../utils/ClassData';
-import { MaterialCommunityIcons } from '@expo/vector-icons';  // 잠금 아이콘을 위해 추가
 
 export default function CategoryTab() {
   const [selectedLevel, setSelectedLevel] = useState('초급');
-  const [completedLessons, setCompletedLessons] = useState({
-    초급: 3,  // 예시로 진행한 강의 개수 (3까지 들었다고 가정)
-    중급: 0,
-    고급: 0,
+  // Store both the last completed lesson ID and the last completed topic
+  const [progress, setProgress] = useState({
+    초급: { lessonId: 3, lastCompletedTopic: '감사합니다' },
+    중급: { lessonId: 0, lastCompletedTopic: null },
+    고급: { lessonId: 0, lastCompletedTopic: null },
   });
+  
+  const navigation = useNavigation();
 
-  // 레벨별 색상 매핑
   const levelColors = {
     '초급': '#39B360',
     '중급': '#487BCD',
@@ -54,10 +57,7 @@ export default function CategoryTab() {
   );
 
   const lessons = classData[selectedLevel] || [];
-
-  // 진행한 강의 수와 총 강의 수
-  const totalLessons = lessons.length;
-  const completed = completedLessons[selectedLevel] || 0;
+  const currentProgress = progress[selectedLevel];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -66,34 +66,46 @@ export default function CategoryTab() {
         <Text style={styles.titleText}>학습진도</Text>
         <Text style={[styles.titleText, { marginLeft: 12 }]}>
           <Text style={[styles.titleText, { color: levelColors[selectedLevel], fontWeight: 'bold' }]}>
-            {completed}
+            {currentProgress.lessonId}
           </Text>
-          {' '} / {totalLessons} 강의
+          {' '} / {lessons.length} 강의
         </Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {lessons.map((lesson, index) => (
-          <View key={lesson.id} style={styles.contentContainer}>
+        {lessons.map((lesson) => (
+          <TouchableOpacity 
+            key={lesson.id} 
+            style={styles.contentContainer}
+            onPress={() => navigation.navigate('LessonDetail', {
+              lesson,
+              title: lesson.title,
+              progress: currentProgress,
+              selectedLevel: selectedLevel,  // 선택한 레벨도 함께 넘겨줍니다.
+            })}
+            disabled={lesson.id > currentProgress.lessonId} 
+          >
             <View style={styles.card}>
-              {/* 강의가 잠금 상태일 때 오버레이 */}
-              {index + 1 > completed && (
+              {lesson.id > currentProgress.lessonId && (
                 <View style={styles.lockOverlay}>
                   <MaterialCommunityIcons name="lock" size={30} color="#fff" />
                 </View>
               )}
               <View style={styles.imageContainer}>
-                <Image 
-                  source={lesson.animationPath}
-                  style={styles.image}
-                />
+                <Image source={lesson.animationPath} style={styles.image} />
               </View>
             </View>
 
             <View style={styles.textContainer}>
-              <Text style={styles.title}>Part {lesson.id}. {lesson.title}</Text>
+              <Text 
+                style={styles.title}
+                numberOfLines={1}  // 이 설정은 텍스트가 한 줄로 표시되도록 합니다.
+                ellipsizeMode="tail" // 텍스트가 길어지면 끝부분을 잘라서 '...'로 표시합니다.
+              >
+                Part {lesson.id}. {lesson.title}
+              </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -115,7 +127,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   categoryText: {
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: 'bold',
     color: '#666',
   },
@@ -127,7 +139,7 @@ const styles = StyleSheet.create({
   },
   indicator: {
     marginTop: 5,
-    width: 30,
+    width: 40,
     height: 5,
     borderRadius: 10,
   },
@@ -142,13 +154,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   card: {
-    width: '100%',
+    width: 145,
     minHeight: 'fit-content',
     padding: 13,
     marginBottom: 5,
     borderRadius: 10,
     backgroundColor: '#f9f9f9',
-    position: 'relative',  // 잠금 오버레이를 카드 위에 올리기 위해 position 설정
+    position: 'relative',
   },
   lockOverlay: {
     position: 'absolute',
@@ -156,11 +168,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',  // 투명한 배경
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    zIndex: 1,  // 잠금 오버레이가 가장 위에 오도록 설정
+    zIndex: 1,
   },
   imageContainer: {
     alignItems: 'center',
@@ -176,11 +188,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginLeft: 10,
     marginBottom: 15,
+    width: 115,  // 너비를 고정하여 텍스트가 잘리도록 합니다.
   },
   title: {
     fontSize: 13,
     fontWeight: 'bold',
     textAlign: 'center',
+    flexShrink: 1,  // 텍스트가 넘치면 잘리도록 합니다.
   },
   titleTextWrapper: {
     flexDirection: 'row',
