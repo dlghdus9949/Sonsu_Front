@@ -1,11 +1,20 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
-const Header = () => {
+const Header = ({ color }) => {  // 색상을 props로 받음
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.button}>
-      <Image
-        source={require("../../assets/images/PrevBtn.png")}
-        style={styles.image}
+    <TouchableOpacity 
+      style={styles.button}  
+      onPress={() => navigation.goBack()}
+    >
+      <MaterialCommunityIcons 
+        name="apple-keyboard-control" 
+        size={25}
+        color={color}  // 색상을 props로 설정
+        style={styles.icon}
       />
     </TouchableOpacity>
   );
@@ -16,12 +25,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     marginTop: "15%",
-    marginHorizontal: 25,
+    marginHorizontal: 15,
+    borderRadius: 10,
+    padding: 10,
   },
-  image: {
-    width: 13, // 크기 증가
-    height: 21, // height 추가
-    zIndex: 1,
+  icon: {
+    transform: [{ rotate: '270deg' }],
   },
 });
 

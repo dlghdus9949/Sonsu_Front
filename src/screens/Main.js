@@ -1,8 +1,11 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import BottomSheet from "../components/BottomSheet/BottomSheet";
+import { useNavigation } from '@react-navigation/native';
 
 const Main = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.Model}>
@@ -11,7 +14,7 @@ const Main = () => {
           source={require("../../assets/images/sonsuModel.png")}
           style={styles.sonsuModel}
         />
-        <TouchableOpacity style={styles.LearnBtn}>
+        <TouchableOpacity style={styles.LearnBtn} onPress={() => navigation.navigate("Classroom")}>
           <Text style={styles.LearnBtnText}>배움터</Text>
         </TouchableOpacity>
       </View>
