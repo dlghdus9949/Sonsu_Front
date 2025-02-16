@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Feather from "@expo/vector-icons/Feather";
 import Main from "../screens/Main";
 import Classroom from "../screens/Classroom/Classroom";
-import MyPage from "../screens/MyPage";
+import MyPage from "../screens/MyPage/MyPage";
 import { View, Image, StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator();
