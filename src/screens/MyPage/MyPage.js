@@ -1,6 +1,8 @@
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Header from "../../components/Header";
 import BackGround from "../../components/BackGround";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 const MyPage = () => {
   return (
@@ -39,6 +41,47 @@ const MyPage = () => {
               학습 알림 설정
             </Text>
           </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* 탭 */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddingHorizontal: 30,
+          marginTop: 25,
+        }}
+      >
+        {/* 출석체크 */}
+        <View style={styles.tabContent}>
+          <Text style={{ fontSize: 12 }}>출석체크</Text>
+          <FontAwesome6
+            name="calendar-check"
+            size={24}
+            color="black"
+            style={{ marginTop: 3 }}
+          />
+        </View>
+        {/* 수어 다시보기 */}
+        <View style={styles.tabContent}>
+          <Text style={{ fontSize: 12 }}>수어 다시보기</Text>
+          <FontAwesome5
+            name="handshake"
+            size={24}
+            color="black"
+            style={{ marginTop: 3 }}
+          />
+        </View>
+        {/* 주간 리포트 */}
+        <View style={styles.tabContent}>
+          <Text style={{ fontSize: 12 }}>출석체크</Text>
+          <FontAwesome6
+            name="calendar-check"
+            size={24}
+            color="black"
+            style={{ marginTop: 3 }}
+          />
         </View>
       </View>
 
@@ -85,6 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
 
+    marginTop: 6,
     paddingHorizontal: 20,
     paddingLeft: 15,
     shadowColor: "#000",
@@ -92,6 +136,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 5,
+  },
+  tabContent: {
+    width: 72,
+    height: 72,
+    backgroundColor: "white",
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
