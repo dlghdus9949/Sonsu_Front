@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
   },
   circle: {
     width: width,
-    height: width * 2,
+    height: width * 1,
     backgroundColor: "#FFE694",
-    borderRadius: width / 3,
+    borderRadius: width / 5,
   },
 });
 
