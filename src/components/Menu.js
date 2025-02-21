@@ -34,7 +34,7 @@ const Menu = () => {
           }}
         />
         <Tab.Screen
-          name="Main"
+          name="Home"
           component={Main}
           options={{
             tabBarIcon: () => (
