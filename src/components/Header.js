@@ -1,6 +1,6 @@
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const Header = ({ color }) => {  // 색상을 props로 받음
   const navigation = useNavigation();
@@ -10,11 +10,11 @@ const Header = ({ color }) => {  // 색상을 props로 받음
       style={styles.button}  
       onPress={() => navigation.goBack()}
     >
-      <MaterialCommunityIcons 
-        name="apple-keyboard-control" 
-        size={25}
-        color={color}  // 색상을 props로 설정
-        style={styles.icon}
+      <AntDesign 
+        name="left" 
+        size={24} 
+        color={color}  
+        style={styles.icon} // 여기에 style 적용
       />
     </TouchableOpacity>
   );
@@ -28,9 +28,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     borderRadius: 10,
     padding: 10,
-  },
-  icon: {
-    transform: [{ rotate: '270deg' }],
   },
 });
 
