@@ -12,6 +12,9 @@ import Classroom from "./src/screens/Classroom/Classroom";
 import LessonDetail from "./src/screens/Classroom/LessonDetail";
 import Study from "./src/screens/Study/Study";
 import Review from "./src/screens/Review/Review";
+import AttendanceCheck from "./src/screens/MyPage/AttendanceCheck";
+import SignReview from "./src/screens/MyPage/SignReview";
+import WeeklyReport from "./src/screens/MyPage/WeeklyReport";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +32,9 @@ export default function App() {
           <Stack.Screen name="LessonDetail" component={LessonDetail} />
           <Stack.Screen name="Study" component={Study} />
           <Stack.Screen name="Review" component={Review} />
+          <Stack.Screen name="AttendanceCheck" component={AttendanceCheck} />
+          <Stack.Screen name="SignReview" component={SignReview} />
+          <Stack.Screen name="WeeklyReport" component={WeeklyReport} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
