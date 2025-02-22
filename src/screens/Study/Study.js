@@ -1,8 +1,8 @@
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { WebView } from 'react-native-webview';
 import SpeedBack from '../../components/SpeedBack';
+import { WebView } from 'react-native-webview'; // WebView import 추가
 
 export default function Study() {
   const route = useRoute();
@@ -10,7 +10,7 @@ export default function Study() {
   const navigation = useNavigation();
 
   // Flask 서버 IP 주소 (로컬 IP로 변경해야 함)
-  const serverIP = 'http://192.0.0.2:5001';  // 로컬 네트워크 IP로 변경
+  const serverIP = 'http://192.168.45.168:5001';  // 로컬 네트워크 IP로 변경
 
   const handlePractice = () => {
     console.log("혼자 해보기 버튼 클릭!");
@@ -38,18 +38,34 @@ export default function Study() {
         <Text style={styles.describe}>2. 두 주먹을 쥐고 바닥이 아래로 향하게 하여 가슴 앞에서 아래로 내려요</Text>
       </View>
 
-      {/* 카메라 비디오 스트리밍 WebView */}
-      <View style={styles.cameraFeedWrapperr}>
-        <WebView
-          source={{ uri: `${serverIP}/video_feed` }}
-          style={styles.cameraFeed}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          originWhitelist={['*']}
-          startInLoadingState={false}
-          allowsFullscreenVideo={true}
-          scrollEnabled={false}
-        />
+      {/* 카메라 비디오 스트리밍 WebView or iframe */}
+      <View style={styles.cameraFeedWrapper}>
+        {Platform.OS === 'web' ? (
+          <iframe
+            src={`${serverIP}/video_feed`}
+            style={styles.cameraFeed}
+            width="100%"
+            height="100%"
+            allowFullScreen
+          />
+        ) : (
+          <WebView
+            source={{ uri: `${serverIP}/video_feed` }}
+            style={styles.cameraFeed}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            originWhitelist={['*']}
+            startInLoadingState={true}
+            allowsFullscreenVideo={true}
+            scrollEnabled={false}
+            onError={(error) => console.log("WebView error:", error)}
+            onHttpError={(syntheticEvent) => {
+              const { nativeEvent } = syntheticEvent;
+              console.log("HTTP error: ", nativeEvent);
+            }}
+            onLoad={() => console.log("WebView loaded successfully!")}
+          />
+        )}
       </View>
 
       {/* 혼자 해보기 버튼 */}
@@ -90,7 +106,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: 330,
   },
-  describe:{
+  describe: {
     fontSize: 15,
     paddingVertical: 2,
   },
@@ -102,7 +118,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   cameraFeed: {
-    flex:1,
+    flex: 1,
     backgroundColor: 'transparent',
   },
   practiceButton: {

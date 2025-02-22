@@ -10,7 +10,7 @@ export default function Review() {
   const [fontsLoaded] = useFonts(customFonts);
 
   if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
+    return <View><Text>Loading...</Text></View>;
   }
 
   return (
@@ -26,17 +26,19 @@ export default function Review() {
           <Image source={require("../../../assets/images/sonsuModel.png")} style={styles.image} />
 
           <View style={styles.speedTextContainer}>
-            <MaskedView
-              style={styles.maskedView}
-              maskElement={<Text style={styles.speedText}>스피드 게임</Text>} // 텍스트를 마스크로 사용
-            >
-              <LinearGradient
-                colors={['#FFD700', '#F2F2F2']} // 그라데이션 색상
-                start={{ x: 0, y: 0.8 }} 
-                end={{ x: 1, y: 0 }}  // 그라데이션을 수평으로 적용
-                style={styles.gradient} // 그라데이션을 텍스트 뒤에 적용
-              />
-            </MaskedView>
+          <MaskedView
+            style={styles.maskedView}
+            maskElement={
+              <Text style={styles.speedText}>스피드 게임</Text> // View 제거
+            }
+          >
+            <LinearGradient
+              colors={['#FFD700', '#F2F2F2']}
+              start={{ x: 0, y: 4 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.gradient}
+            />
+          </MaskedView>
 
             <View style={styles.textWrapper}>
               <Text style={styles.speedText2}>실시간 게임으로 빠르게 수어 실력을 향상시키세요!</Text>
@@ -48,7 +50,7 @@ export default function Review() {
           <View style={styles.speedTextContainer}>
             <MaskedView
               style={styles.maskedView}
-              maskElement={<Text style={styles.speedText}>OX 퀴즈</Text>} // 텍스트를 마스크로 사용
+              maskElement={<View><Text style={styles.speedText}>OX 퀴즈</Text></View>} // 텍스트를 마스크로 사용
             >
               <LinearGradient
                 colors={['#4495C0', '#80B5D1']} // 그라데이션 색상
@@ -102,6 +104,8 @@ const styles = StyleSheet.create({
   maskedView: {
     width: '100%',
     height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   gradient: {
     width: '100%',
