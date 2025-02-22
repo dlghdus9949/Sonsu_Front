@@ -1,11 +1,18 @@
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 import BackGround from "../../components/BackGround";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
+import { ScrollView } from "react-native-gesture-handler";
+import WeeklyRanking from "./WeeklyRanking";
 
 const MyPage = () => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Header color="#fff"/>
+    <View>
+      <Header color="#fff" />
       <BackGround />
       {/* 사용자 프로필 */}
       <View style={styles.Profile}>
@@ -41,11 +48,59 @@ const MyPage = () => {
           </TouchableOpacity>
         </View>
       </View>
+      {/* 탭 */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddingHorizontal: 30,
+          marginTop: 25,
+        }}
+      >
+        {/* 출석체크 */}
+        <TouchableOpacity
+          style={styles.tabContent}
+          onPress={() => navigation.navigate("AttendanceCheck")}
+        >
+          <Text style={{ fontSize: 12 }}>출석체크</Text>
+          <FontAwesome6
+            name="calendar-check"
+            size={24}
+            color="black"
+            style={{ marginTop: 3 }}
+          />
+        </TouchableOpacity>
+        {/* 수어 다시보기 */}
+        <TouchableOpacity
+          style={styles.tabContent}
+          onPress={() => navigation.navigate("SignReview")}
+        >
+          <Text style={{ fontSize: 12 }}>수어 다시보기</Text>
+          <FontAwesome5
+            name="handshake"
+            size={24}
+            color="black"
+            style={{ marginTop: 3 }}
+          />
+        </TouchableOpacity>
+        {/* 주간 리포트 */}
+        <TouchableOpacity
+          style={styles.tabContent}
+          onPress={() => navigation.navigate("WeeklyReport")}
+        >
+          <Text style={{ fontSize: 12 }}>주간 리포트</Text>
+          <SimpleLineIcons
+            name="docs"
+            size={24}
+            color="black"
+            style={{ marginTop: 3 }}
+          />
+        </TouchableOpacity>
+      </View>
 
-      {/* 랭킹 */}
-      <View></View>
-
-      {/* 오답 수어 다시보기 */}
+      <ScrollView style={styles.contentWrap}>
+        <WeeklyRanking />
+      </ScrollView>
     </View>
   );
 };
@@ -85,6 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
 
+    marginTop: 6,
     paddingHorizontal: 20,
     paddingLeft: 15,
     shadowColor: "#000",
@@ -92,6 +148,26 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 5,
+  },
+  contentWrap: {
+    paddingHorizontal: 40,
+    marginTop: 20,
+  },
+  tabContent: {
+    width: 72,
+    height: 72,
+    backgroundColor: "white",
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000", // 그림자 색상
+    shadowOffset: { width: 0, height: 1 }, // 그림자 오프셋
+    shadowOpacity: 0.25, // 그림자 투명도
+    shadowRadius: 3.5, // 그림자 반경
+    elevation: 5, // 안드로이드에서 그림자 효과 적용
+  },
+  chartContainer: {
+    marginTop: 20,
   },
 });
 
