@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginLeft: 10,
     marginBottom: 15,
     width: 115,  // 너비를 고정하여 텍스트가 잘리도록 합니다.
