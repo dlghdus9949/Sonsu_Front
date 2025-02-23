@@ -9,6 +9,10 @@ import {
 } from "react-native";
 import Header from "../../components/Header";
 import BackGround from "../../components/BackGround";
+import Notice from "../../components/Notice";
+import Menu from "../../components/Menu";
+import { ScrollView } from "react-native-gesture-handler";
+import Pie from "../../components/Pie";
 
 const AttendanceCheck = () => {
   const [daysInMonth, setDaysInMonth] = useState([]);
@@ -44,11 +48,11 @@ const AttendanceCheck = () => {
       currentMonthDays.push({ date: i, isCurrentMonth: true });
     }
 
-    // 다음 달의 날짜 추가 (해당 월의 마지막 날이 끝나는 요일 이후에)
+    const totalDays = prevMonthDays.length + currentMonthDays.length;
+    const remainingDays = totalDays % 7 === 0 ? 0 : 7 - (totalDays % 7); // 한 줄 더 추가되는 문제 방지
+
     const nextMonthDays = [];
-    const nextMonthStart =
-      7 - ((prevMonthDays.length + currentMonthDays.length) % 7);
-    for (let i = 1; i <= nextMonthStart; i++) {
+    for (let i = 1; i <= remainingDays; i++) {
       nextMonthDays.push({
         date: i,
         isCurrentMonth: false,
@@ -123,7 +127,7 @@ const AttendanceCheck = () => {
           styles.day,
           !item.isCurrentMonth && styles.disabledDay, // 현재 월이 아닌 날짜는 비활성화
 
-          isSelected && styles.selectedDay, // 선택된 날짜 강조
+          isSelected && styles.selectedDay && item.isCurrentMonth, // 선택된 날짜 강조
         ]}
       >
         <TouchableOpacity onPress={() => onDateSelect(item)}>
@@ -138,7 +142,7 @@ const AttendanceCheck = () => {
           </Text>
         </TouchableOpacity>
 
-        {isSelected && (
+        {isSelected && item.isCurrentMonth && (
           <Image
             source={require("../../../assets/images/SonsuLogo.png")}
             style={styles.selectedImage}
@@ -148,10 +152,25 @@ const AttendanceCheck = () => {
     );
   };
 
+  // PieChart
+  const firstValue = 20;
+  const secondValue = 100 - firstValue;
+  const data = [
+    { value: firstValue, color: "#e0e0e0" },
+    { value: secondValue, color: "#FFE694" },
+  ];
+  const radius = 50;
+  const innerRadius = 25;
+  const backgroundColor = "#f5f5f5";
+
+  // 공지 글
+  const NotText = "출석은 하루에 최소 1개 이상의 학습을 완료해야만 인정됩니다.";
+
   return (
     <View>
       <Header />
       <BackGround />
+
       <View style={styles.container}>
         <Text style={{ fontSize: 30, textAlign: "center", marginBottom: 5 }}>
           출석체크
@@ -161,47 +180,73 @@ const AttendanceCheck = () => {
             fontSize: 12,
             textAlign: "center",
             color: "#333",
-            marginBottom: 15,
+            marginBottom: "10%",
           }}
         >
           내 수어 학습 출석률은? 오늘도 한 걸음 더 나아가요!
         </Text>
       </View>
       {/* 달력 */}
-      <View style={styles.calenderContainer}>
-        <View style={styles.monthHeader}>
-          <TouchableOpacity onPress={goToPreviousMonth}>
-            <Text style={styles.arrow}>{"<"}</Text>
-          </TouchableOpacity>
-          <Text style={styles.header}>
-            {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
-          </Text>
-          <TouchableOpacity onPress={goToNextMonth}>
-            <Text style={styles.arrow}>{">"}</Text>
-          </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.calenderContainer}>
+          <View style={styles.monthHeader}>
+            <TouchableOpacity onPress={goToPreviousMonth}>
+              <Text style={styles.arrow}>{"<"}</Text>
+            </TouchableOpacity>
+            <Text style={styles.header}>
+              {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
+            </Text>
+            <TouchableOpacity onPress={goToNextMonth}>
+              <Text style={styles.arrow}>{">"}</Text>
+            </TouchableOpacity>
+          </View>
+          {renderWeekdays()}
+          <View style={styles.calendarContent}>
+            {daysInMonth.map((item, index) => renderItem({ item }))}
+          </View>
         </View>
-        {renderWeekdays()}
-        <FlatList
-          data={daysInMonth}
-          renderItem={renderItem}
-          numColumns={7} // 한 줄에 7개의 날짜를 표시
-          keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={styles.calendarContent}
-        />
-      </View>
 
-      {/* 공지 */}
+        {/* 공지 */}
+        <Notice NotText={NotText} />
+
+        {/* 나의 00월 출석률은? */}
+        <View style={{ width: "90%", alignSelf: "center", marginTop: 45 }}>
+          <Text style={styles.title}>
+            나의 {currentDate.getMonth() + 1}월 출석률은?
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              width: "90%",
+              alignSelf: "center",
+            }}
+          >
+            <View style={styles.PieWrap}>
+              <Pie
+                data={data}
+                radius={radius}
+                innerRadius={innerRadius}
+                backgroundColor={backgroundColor}
+                donut={true}
+              />
+            </View>
+            <View style={{ marginLeft: 20, justifyContent: "center" }}>
+              <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                {firstValue}%
+              </Text>
+              <Text style={{ fontSize: 12, marginTop: 8 }}>
+                100%를 향한 도전, 함께 달려보아요!
+              </Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 40,
-    marginVertical: 20,
-  },
   calenderContainer: {
-    justifyContent: "center",
     alignSelf: "center",
     padding: 20,
     backgroundColor: "white",
@@ -230,7 +275,7 @@ const styles = StyleSheet.create({
   },
   weekdaysContainer: {
     flexDirection: "row",
-    justifyContent: "space-around", // space-between을 space-around로 변경
+    justifyContent: "space-around",
     width: "100%",
     marginBottom: 10,
   },
@@ -240,7 +285,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   day: {
-    width: "12.4%", // 한 칸의 너비를 14%로 설정하여 7개 칸을 균등하게 배치
+    width: "12.34%",
     aspectRatio: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -257,19 +302,29 @@ const styles = StyleSheet.create({
   disabledDayText: {
     color: "#d3d3d3",
   },
-  selectedDay: {
-    backgroundColor: "#FFE694", // 선택된 날짜 스타일
-    borderRadius: 30,
-  },
+  selectedDay: {},
   selectedImage: {
+    backgroundColor: "#FFE694", // 선택된 날짜 스타일
     position: "absolute",
-    width: 25,
+    borderRadius: 30,
+    width: 35,
+    height: 35,
+    padding: 3,
     resizeMode: "contain",
   },
   calendarContent: {
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginBottom: 20,
+    paddingLeft: 10,
+  },
+  PieWrap: {
+    // backgroundColor: "red",
   },
 });
 
