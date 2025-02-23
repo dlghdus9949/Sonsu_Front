@@ -43,7 +43,6 @@ current_question = None
 game_result = None
 
 # 비디오 스트리밍 처리
-# 비디오 스트리밍 처리
 def process_frame():
     global seq, action_seq, last_action, game_result
     cap = cv2.VideoCapture(0)
@@ -60,8 +59,10 @@ def process_frame():
 
         img = cv2.flip(img, 1)  # 좌우 반전
 
-        # Holistic 모델을 사용하여 손 및 얼굴 추적
+        # Holistic 모델을 사용하여 손 및 얼굴저 추적
         results = detector.findHolistic(img, draw=True)  # results를 반환받음
+        # results = detector.findHolistic(img, draw=True, image_dimensions=(img.shape[1], img.shape[0]))
+
 
         # results가 numpy.ndarray일 경우
         if isinstance(results, np.ndarray):
