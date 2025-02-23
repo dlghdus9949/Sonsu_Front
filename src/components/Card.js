@@ -1,37 +1,45 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import tailwind from 'tailwind-rn';
 
 export default function Card({ lesson, currentProgress, onPress }) {
   const lessonLocked = lesson.id > currentProgress.lessonId;
 
   return (
-    <TouchableOpacity 
-      style={styles.contentContainer} 
-      onPress={onPress} 
-      disabled={lessonLocked}
-    >
-      <View style={styles.card}>
-        {lessonLocked && (
-          <View style={styles.lockOverlay}>
-            <MaterialCommunityIcons name="lock" size={30} color="#fff" />
+    <View>
+      <View 
+        style={styles.contentContainer} 
+        onPress={onPress} 
+        disabled={lessonLocked}
+      >
+        <View style={styles.card}>
+          {lessonLocked && (
+            <View style={styles.lockOverlay}>
+              <MaterialCommunityIcons name="lock" size={30} color="#fff" />
+            </View>
+          )}
+          <View style={styles.imageContainer}>
+            <Image source={lesson.animationPath} style={styles.image} />
           </View>
-        )}
-        <View style={styles.imageContainer}>
-          <Image source={lesson.animationPath} style={styles.image} />
+        </View>
+
+        <View style={styles.textContainer}>
+          <Text 
+            style={styles.title}
+            numberOfLines={1} 
+            ellipsizeMode="tail"
+          >
+            Part {lesson.id}. {lesson.title}
+          </Text>
         </View>
       </View>
-
-      <View style={styles.textContainer}>
-        <Text 
-          style={styles.title}
-          numberOfLines={1} 
-          ellipsizeMode="tail"
-        >
-          Part {lesson.id}. {lesson.title}
+      <View style={[tailwind('items-center text-center'), { backgroundColor: '#FFE694', paddingHorizontal: 6, paddingVertical: 5, borderRadius: 15 }]}>
+        <Text>
+          다시 학습하기
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 
@@ -40,13 +48,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   card: {
-    width: 145,
     minHeight: 'fit-content',
-    padding: 13,
+    paddingVertical: 14,
+    paddingHorizontal: 10,
     marginBottom: 5,
     borderRadius: 10,
     backgroundColor: '#f9f9f9',
-    position: 'relative',
   },
   lockOverlay: {
     position: 'absolute',
@@ -73,7 +80,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
-    marginBottom: 15,
+    marginBottom: 8,
+    paddingVertical: 5,
     width: 115,
   },
   title: {
