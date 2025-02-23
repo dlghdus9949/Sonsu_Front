@@ -174,7 +174,7 @@ const AttendanceCheck = () => {
       <Header />
       <BackGround />
 
-      <View style={styles.container}>
+      <View>
         <Text style={{ fontSize: 30, textAlign: "center", marginBottom: 5 }}>
           출석체크
         </Text>
