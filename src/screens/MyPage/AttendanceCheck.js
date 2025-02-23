@@ -117,12 +117,15 @@ const AttendanceCheck = () => {
   };
 
   const renderItem = ({ item }) => {
+    if (!item.date) return null; // item.date가 없다면 렌더링하지 않음
+
     const monthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
     const isSelected =
       selectedDates[monthKey] && selectedDates[monthKey].includes(item.date);
 
     return (
       <View
+        key={`${item.date}-${item.isCurrentMonth}`} // date와 isCurrentMonth를 결합한 고유한 key 사용
         style={[
           styles.day,
           !item.isCurrentMonth && styles.disabledDay, // 현재 월이 아닌 날짜는 비활성화
