@@ -10,7 +10,7 @@ export default function Study() {
   const navigation = useNavigation();
 
   // Flask 서버 IP 주소 (로컬 IP로 변경해야 함)
-  const serverIP = 'http://192.168.45.168:5001';  // 로컬 네트워크 IP로 변경
+  const serverIP = 'http://192.168.45.5:5001';
 
   const handlePractice = () => {
     console.log("혼자 해보기 버튼 클릭!");
@@ -55,15 +55,14 @@ export default function Study() {
             javaScriptEnabled={true}
             domStorageEnabled={true}
             originWhitelist={['*']}
-            startInLoadingState={true}
             allowsFullscreenVideo={true}
-            scrollEnabled={false}
+            allowsInlineMediaPlayback={true}  // 추가된 속성
+            mediaPlaybackRequiresUserAction={false}  // 추가된 속성
             onError={(error) => console.log("WebView error:", error)}
             onHttpError={(syntheticEvent) => {
               const { nativeEvent } = syntheticEvent;
               console.log("HTTP error: ", nativeEvent);
             }}
-            onLoad={() => console.log("WebView loaded successfully!")}
           />
         )}
       </View>
