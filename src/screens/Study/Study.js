@@ -9,20 +9,15 @@ import {
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SpeedBack from "../../components/SpeedBack";
-import { WebView } from "react-native-webview"; // WebView import 추가
+import { WebView } from "react-native-webview";
 
 export default function Study() {
   const route = useRoute();
-  const { topic, lesson } = route.params; // 전달된 topic 받기
+  const { topic, lesson } = route.params;
   const navigation = useNavigation();
 
   // Flask 서버 IP 주소 (로컬 IP로 변경해야 함)
-  const serverIP = "http://172.29.90.107:5001";
-
-  const handlePractice = () => {
-    console.log("혼자 해보기 버튼 클릭!");
-    // 여기에 혼자 연습하는 기능을 추가하면 됨
-  };
+  const serverIP = "http://192.168.45.5:5001";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -83,7 +78,10 @@ export default function Study() {
       </View>
 
       {/* 혼자 해보기 버튼 */}
-      <TouchableOpacity style={styles.practiceButton} onPress={handlePractice}>
+      <TouchableOpacity
+        style={styles.practiceButton}
+        onPress={() => navigation.navigate("StudyOnly", { topic, lesson })}
+      >
         <Text style={styles.practiceButtonText}>혼자 해보기{"  ->"}</Text>
       </TouchableOpacity>
     </SafeAreaView>
