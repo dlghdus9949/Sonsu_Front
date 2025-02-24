@@ -15,6 +15,7 @@ import Review from "./src/screens/Review/Review";
 import AttendanceCheck from "./src/screens/MyPage/AttendanceCheck";
 import SignReview from "./src/screens/MyPage/SignReview";
 import WeeklyReport from "./src/screens/MyPage/WeeklyReport";
+import StudyOnly from "./src/screens/Study/StudyOnly";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ export default function App() {
           <Stack.Screen name="AttendanceCheck" component={AttendanceCheck} />
           <Stack.Screen name="SignReview" component={SignReview} />
           <Stack.Screen name="WeeklyReport" component={WeeklyReport} />
+          <Stack.Screen name="StudyOnly" component={StudyOnly} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
