@@ -16,7 +16,7 @@ export default function Review() {
       </View>
 
       {/* 스피드 게임 */}
-      <View style={[tailwind('flex-row justify-between items-center bg-red-300 mt-7 mb-5'), styles.gameBox]}>
+      <View style={[tailwind('flex-row justify-between items-center bg-red-300 mt-5 mb-5'), styles.gameBox]}>
         <View style={styles.imageContainer}>
           <Image 
             source={require("../../../assets/images/sonsuModel.png")} 
@@ -56,7 +56,7 @@ export default function Review() {
       </View>
 
       {/* 오답 수어 다시보기 */}
-      <View style={tailwind('flex-row justify-between items-center mt-2 ㅡㅠ-7 mx-10')}>
+      <View style={tailwind('flex-row justify-between items-center mt-2 mb-2 mx-10')}>
         <Text style={tailwind('text-xl font-semibold')}>오답 수어 다시보기</Text>
         <AntDesign name="arrowright" size={24} color="black" />
       </View>
