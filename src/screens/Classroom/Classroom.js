@@ -13,7 +13,7 @@ export default function Classroom() {
     중급: { lessonId: 0, lastCompletedTopic: null },
     고급: { lessonId: 0, lastCompletedTopic: null },
   });
-  
+
   const navigation = useNavigation();
 
   const levelColors = {
@@ -53,6 +53,14 @@ export default function Classroom() {
           </View>
         </TouchableOpacity>
       ))}
+
+      {/* Review 버튼 추가 */}
+      <TouchableOpacity
+        style={styles.reviewButton}
+        onPress={() => navigation.navigate('Review')}
+      >
+        <Text style={styles.reviewButtonText}>Review</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -62,7 +70,7 @@ export default function Classroom() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.Title}>배움터</Text>
-      
+
       {renderCategoryButtons()}
 
       <View style={styles.titleTextWrapper}>
@@ -151,6 +159,20 @@ const styles = StyleSheet.create({
     width: 40,
     height: 5,
     borderRadius: 10,
+  },
+  reviewButton: {
+    backgroundColor: '#FF9381',
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 20,  // 카테고리 버튼 사이에 여백을 추가
+  },
+  reviewButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   scrollContainer: {
     flexGrow: 1,
