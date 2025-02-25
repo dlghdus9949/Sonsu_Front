@@ -67,6 +67,7 @@ const SignUp = () => {
       setErrors(newErrors);
     } else {
       try {
+
         const response = await axios.post("http://192.0.0.2:5002/register", {
           username: name,
           loginId: id,
