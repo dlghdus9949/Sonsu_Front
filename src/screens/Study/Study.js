@@ -4,7 +4,6 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Platform,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,8 +15,8 @@ export default function Study() {
   const { topic, lesson } = route.params;
   const navigation = useNavigation();
 
-  // Flask 서버 IP 주소 (로컬 IP로 변경해야 함)
-  const serverIP = "http://192.168.45.5:5001";
+  // const serverIP = "http://192.168.45.121:5001";
+  const serverIP = "http://192.168.10.20:5001";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -48,33 +47,23 @@ export default function Study() {
         </Text>
       </View>
 
-      {/* 카메라 비디오 스트리밍 WebView or iframe */}
+      {/* 카메라 비디오 스트리밍 WebView */}
       <View style={styles.cameraFeedWrapper}>
-        {Platform.OS === "web" ? (
-          <iframe
-            src={`${serverIP}/video_feed`}
-            style={styles.cameraFeed}
-            width="100%"
-            height="100%"
-            allowFullScreen
-          />
-        ) : (
-          <WebView
-            source={{ uri: `${serverIP}/video_feed` }}
-            style={styles.cameraFeed}
-            javaScriptEnabled={true}
-            domStorageEnabled={true}
-            originWhitelist={["*"]}
-            allowsFullscreenVideo={true}
-            allowsInlineMediaPlayback={true} // 추가된 속성
-            mediaPlaybackRequiresUserAction={false} // 추가된 속성
-            onError={(error) => console.log("WebView error:", error)}
-            onHttpError={(syntheticEvent) => {
-              const { nativeEvent } = syntheticEvent;
-              console.log("HTTP error: ", nativeEvent);
-            }}
-          />
-        )}
+        <WebView
+          source={{ uri: `${serverIP}/video_feed` }}
+          style={styles.cameraFeed}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          originWhitelist={["*"]}
+          allowsFullscreenVideo={true}
+          allowsInlineMediaPlayback={true} // 추가된 속성
+          mediaPlaybackRequiresUserAction={false} // 추가된 속성
+          onError={(error) => console.log("WebView error:", error)}
+          onHttpError={(syntheticEvent) => {
+            const { nativeEvent } = syntheticEvent;
+            console.log("HTTP error: ", nativeEvent);
+          }}
+        />
       </View>
 
       {/* 혼자 해보기 버튼 */}

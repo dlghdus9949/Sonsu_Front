@@ -10,6 +10,7 @@ import {
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -17,11 +18,28 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    console.log("ID:", id);
-    console.log("Password:", password);
-    navigation.navigate("AppPermissions"); // 로그인하면 Main.js로 이동
+    axios
+      .post(
+        "http://192.168.45.121:5002/login",
+        {
+          loginId: id,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.data);
+          navigation.navigate("AppPermissions");
+        }
+      })
+      .catch((error) => {
+        console.error("로그인 실패:", error.response);
+        alert("로그인 실패: 잘못된 아이디 또는 비밀번호입니다."); // 수정된 부분
+      });
   };
-
   const handleSignUp = () => {
     navigation.navigate("PrivacyPolicy"); // 회원가입 버튼 클릭 시 SignUp.js로 이동
   };
