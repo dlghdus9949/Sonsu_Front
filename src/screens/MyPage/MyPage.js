@@ -1,4 +1,11 @@
-import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 import BackGround from "../../components/BackGround";
@@ -7,6 +14,9 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import { ScrollView } from "react-native-gesture-handler";
 import WeeklyRanking from "./WeeklyRanking";
+import ReviewComponent from "../../components/ReviewComponent";
+import tailwind from "tailwind-rn";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const MyPage = () => {
   const navigation = useNavigation();
@@ -14,7 +24,7 @@ const MyPage = () => {
   const handleLogout = () => {
     Alert.alert("로그아웃", "정말 로그아웃 하시겠습니까?", [
       { text: "취소", style: "cancel" },
-      { text: "확인", onPress: () => console.log("로그아웃 처리") },
+      { text: "확인", onPress: () => console.log("로그아웃 처리(해야댐)") },
     ]);
   };
 
@@ -83,9 +93,9 @@ const MyPage = () => {
           style={styles.tabContent}
           onPress={() => navigation.navigate("SignReview")}
         >
-          <Text style={{ fontSize: 12 }}>수어 다시보기</Text>
+          <Text style={{ fontSize: 12 }}>저장한 수어</Text>
           <FontAwesome5
-            name="handshake"
+            name="bookmark"
             size={24}
             color="black"
             style={{ marginTop: 3 }}
@@ -108,6 +118,17 @@ const MyPage = () => {
 
       <ScrollView style={styles.contentWrap}>
         <WeeklyRanking />
+        <View
+          style={tailwind("flex-row justify-between items-center mt-6 mb-2 ")}
+        >
+          <Text style={tailwind("text-lg font-semibold")}>
+            오답 수어 다시보기
+          </Text>
+          <AntDesign name="arrowright" size={24} color="black" />
+        </View>
+
+        {/* 오답수어 컨텐츠 */}
+        <ReviewComponent />
       </ScrollView>
     </View>
   );
@@ -160,6 +181,7 @@ const styles = StyleSheet.create({
   contentWrap: {
     paddingHorizontal: 40,
     marginTop: 20,
+    marginBottom: 400,
   },
   tabContent: {
     width: 72,
