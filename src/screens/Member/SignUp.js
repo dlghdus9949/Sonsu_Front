@@ -67,16 +67,14 @@ const SignUp = () => {
       setErrors(newErrors);
     } else {
       try {
-        const response = await axios.post(
-          "http://192.168.45.121:5002/register",
-          {
-            username: name,
-            loginId: id,
-            password: password,
-            confirmPassword: confirmPassword,
-            email: email,
-          }
-        );
+
+        const response = await axios.post("http://192.0.0.2:5002/register", {
+          username: name,
+          loginId: id,
+          password: password,
+          confirmPassword: confirmPassword,
+          email: email,
+        });
         console.log(response.data);
         navigation.navigate("Login");
       } catch (error) {
