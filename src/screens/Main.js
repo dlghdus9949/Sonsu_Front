@@ -11,7 +11,7 @@ const Main = () => {
   useEffect(() => {
     try {
       axios
-        .get("http://192.168.45.121:5002/login/success", {
+        .get("http://192.0.0.2:5002/login/success", {
           withCredentials: true,
         })
         .then((response) => {
@@ -43,7 +43,6 @@ const Main = () => {
         </TouchableOpacity>
       </View>
 
-      {/* BottomSheet 컴포넌트 호출 */}
       <BottomSheet />
     </View>
   );

@@ -1,5 +1,13 @@
 import React from "react";
-import { ScrollView, View, Text, Image, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import ReviewComponent from "../../components/ReviewComponent";
@@ -96,12 +104,12 @@ export default function Review() {
 const styles = StyleSheet.create({
   gameBox: {
     width: "85%",
-    height: 160,
+    height: 140,
     borderRadius: 16,
     shadowColor: "#000",
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    shadowOffset: { width: 2, height: 5 },
+    shadowOffset: { width: 2, height: 6 },
     alignSelf: "center",
     justifyContent: "space-around",
   },
