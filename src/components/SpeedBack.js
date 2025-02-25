@@ -2,10 +2,10 @@ import { View, StyleSheet, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window"); // 화면 너비 가져오기
 
-const SpeedBack = () => {
+const SpeedBack = ({ heightMultiplier = 1.7 }) => { // heightMultiplier를 props로 받음
   return (
     <View style={styles.container}>
-      <View style={styles.circle}></View>
+      <View style={[styles.circle, { height: width * heightMultiplier }]}></View> {/* height에 multiplier 적용 */}
     </View>
   );
 };
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   },
   circle: {
     width: width,
-    height: width * 1.7,
     backgroundColor: "#FFE694",
     borderRadius: width / 2.3,
   },
