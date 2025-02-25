@@ -10,9 +10,17 @@ import WeeklyRanking from "./WeeklyRanking";
 
 const MyPage = () => {
   const navigation = useNavigation();
+
+  const handleLogout = () => {
+    Alert.alert("로그아웃", "정말 로그아웃 하시겠습니까?", [
+      { text: "취소", style: "cancel" },
+      { text: "확인", onPress: () => console.log("로그아웃 처리") },
+    ]);
+  };
+
   return (
     <View>
-      <Header color="#fff" />
+      <Header color="#fff" showLogout={true} onLogout={handleLogout} />
       <BackGround />
       {/* 사용자 프로필 */}
       <View style={styles.Profile}>
@@ -109,7 +117,7 @@ const styles = StyleSheet.create({
   Profile: {
     flexDirection: "row",
     paddingLeft: "11%",
-    paddingTop: "5%",
+    paddingTop: "2%",
   },
   profileContent: {
     justifyContent: "space-evenly",

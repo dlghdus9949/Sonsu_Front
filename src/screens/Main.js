@@ -1,25 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import BottomSheet from "../components/BottomSheet/BottomSheet";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const Main = () => {
   const navigation = useNavigation();
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    try {
+      axios
+        .get("http://192.0.0.2:5002/login/success", {
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.data) {
+            setUserInfo(response.data);
+            console.log(response.data);
+          }
+        });
+    } catch (error) {
+      console.log("사용자 정보 가져오기 실패:", error.message);
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.Model}>
-        <Text style={styles.textYellow}>안녕하세요, OO님!</Text>
+        <Text style={styles.textYellow}>
+          안녕하세요, {userInfo.username ? userInfo.username : "undefined"}님!
+        </Text>
         <Image
           source={require("../../assets/images/sonsuModel.png")}
           style={styles.sonsuModel}
         />
-        <TouchableOpacity style={styles.LearnBtn} onPress={() => navigation.navigate("Classroom")}>
+        <TouchableOpacity
+          style={styles.LearnBtn}
+          onPress={() => navigation.navigate("Classroom")}
+        >
           <Text style={styles.LearnBtnText}>배움터</Text>
         </TouchableOpacity>
       </View>
 
-      {/* BottomSheet 컴포넌트 호출 */}
       <BottomSheet />
     </View>
   );

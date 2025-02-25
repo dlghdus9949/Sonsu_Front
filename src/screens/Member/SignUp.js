@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const SignUp = () => {
   const navigation = useNavigation();
@@ -27,7 +28,7 @@ const SignUp = () => {
     email: "",
   });
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     const newErrors = {};
 
     // 이름 유효성 검사
@@ -65,14 +66,19 @@ const SignUp = () => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      // 유효성 검사 통과 시
-      console.log("회원가입 정보:", {
-        name,
-        id,
-        password,
-        email,
-      });
-      navigation.navigate("Login");
+      try {
+        const response = await axios.post("http://192.0.0.2:5002/register", {
+          username: name,
+          loginId: id,
+          password: password,
+          confirmPassword: confirmPassword,
+          email: email,
+        });
+        console.log(response.data);
+        navigation.navigate("Login");
+      } catch (error) {
+        console.log("회원가입 실패:", error.response.data.message);
+      }
     }
   };
 
