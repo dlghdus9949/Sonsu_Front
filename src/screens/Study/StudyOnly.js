@@ -10,7 +10,8 @@ export default function StudyOnly() {
   const { topic, lesson } = route.params;
   const navigation = useNavigation();
 
-  const serverIP = "http://192.168.45.5:5001";
+  // const serverIP = "http://192.168.45.121:5001";
+  const serverIP = "http://192.168.10.20:5001";
 
   return (
     <SafeAreaView style={styles.container}>
