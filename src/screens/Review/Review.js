@@ -1,10 +1,17 @@
-import React from 'react';
-import { ScrollView, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import Header from '../../components/Header';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import ReviewComponent from '../../components/ReviewComponent';
-import tailwind from 'tailwind-rn';
+import React from "react";
+import {
+  ScrollView,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import Header from "../../components/Header";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import ReviewComponent from "../../components/ReviewComponent";
+import tailwind from "tailwind-rn";
 
 export default function Review() {
   const navigation = useNavigation();
@@ -47,7 +54,7 @@ export default function Review() {
             실시간 게임으로 빠르게 수어 복습!
           </Text>
         </View>
-      </TouchableOpacity>
+      </View>
 
       {/* OX 퀴즈 */}
       <View
