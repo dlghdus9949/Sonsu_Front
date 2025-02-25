@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-
 import {
   View,
   Text,
@@ -20,7 +19,6 @@ const Login = () => {
   const handleLogin = () => {
     axios
       .post(
-
         "http://192.0.0.2:5002/login",
 
         {
